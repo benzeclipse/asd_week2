@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!-- Banchop Ben Kangdouangnhot, Term 1308, AVFW -->
+<html>
+	<head>
+    	<title>Ticket Hub</title>
+    	<link rel="stylesheet" href="main.css" type="text/css" />
+   		<meta charset="UTF-8">
+   		<meta name = "MobileOptimized" content= "320" />
+  		<meta name = "robot" content="index, follow" />
+  		<meta name = "HandheldFriendly" content="True" />
+  		<meta name = "viewport" content="user-scalable=no, width=device-width"/>
+  	</head> 
+  	
+  	
+<script>
+function loadXMLDoc(url)
+{
+var xmlhttp;
+var txt,x,xx,i;
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    txt="<table border='1'><tr><th>TEAMS</th><th>TICKETS</th></tr>";
+    x=xmlhttp.responseXML.documentElement.getElementsByTagName("TK");
+    for (i=0;i<x.length;i++)
+      {
+      txt=txt + "<tr>";
+      xx=x[i].getElementsByTagName("TEAMS");
+        {
+        try
+          {
+          txt=txt + "<td>" + xx[0].firstChild.nodeValue + "</td>";
+          }
+        catch (er)
+          {
+          txt=txt + "<td> </td>";
+          }
+        }
+      xx=x[i].getElementsByTagName("TICKETS");
+        {
+        try
+          {
+          txt=txt + "<td>" + xx[0].firstChild.nodeValue + "</td>";
+          }
+        catch (er)
+          {
+          txt=txt + "<td> </td>";
+          }
+        }
+      txt=txt + "</tr>";
+      }
+    txt=txt + "</table>";
+    document.getElementById('tickInfo').innerHTML=txt;
+    }
+  }
+xmlhttp.open("GET",url,true);
+xmlhttp.send();
+}
+</script>
+  		
+
+	
+	
+	<body onload = "process()">
+	<h1>TicketSales</h1>
+	  <form  action="#" id="form">
+			<fieldset>
+		<legend>Check Product Availability</legend>
+		
+				<p>Search tickets:</p>
+				<input type="text" id="userInput" placeholder="ex. nfl"/>
+				<div id="underInput"></div>
+			</fieldset>
+	
+			<fieldset>
+				 <p onclick="alert("works")">Please enter your name: </p>
+				 <p><input type="text" id="name" placeholder="enter name..."/>
+	 
+				<p>Concerns:</p>
+				<p><textarea id="string" placeholder="concerns..."/></textarea>
+				<input id="button" type="button" value="Submit"/></p> 
+			
+		
+			<div id="feedback"></div>
+			<div id="messages"></div>
+			</fieldset>
+			
+	
+
+	
+	<div>
+	<a href="index.html" id="home">Home</a>
+	<a href="add.html" id="home">Back</a>
+	</div>
+
+	
+	<br>
+	<div id="tickInfo">
+	<button onclick="loadXMLDoc('ticket_catalog.xml')">Get Ticket Info</button>
+	</div>
+	</br>
+	
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="json.json"></script>
+	</body>
+</html>
+
